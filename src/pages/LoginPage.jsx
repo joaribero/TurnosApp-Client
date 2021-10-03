@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import {Button,Form, Col, Container, Row, Card, Image} from 'react-bootstrap';
 import AuthContext from '../context/auth/authContext';
-import { Redirect } from "react-router-dom";
 import  {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
@@ -9,7 +8,7 @@ import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-butto
 const LoginPage = (props) => {
     
     const authContext = useContext(AuthContext);
-    const {user,message, login} = authContext;
+    const {user,message, login, fbLogin, googleLogin} = authContext;
 
     const [loginUsername,setLoginUsername] = useState("");
     const [loginPassword,setLoginPassword] = useState("");
@@ -22,7 +21,7 @@ const LoginPage = (props) => {
         if (message) {
             notify();
         }
-
+        //eslint-disable-next-line
     },[message]);
 
     const onSubmitLogin = async (e) => {
@@ -31,13 +30,21 @@ const LoginPage = (props) => {
         if (user) props.history.push("/");      
     }
 
+    const onClickLoginFb = () => {
+        fbLogin();
+    }
+
+    const onClickLoginGoogle = () => {
+        googleLogin();
+    }
+
     //if (user) return <Redirect to='/'/>      
 
     return ( 
         <div>         
             <Container className="p-5">
                 <Row>
-                    <Col md={5}>
+                    <Col md={12} xs={12} lg={5}>
                         <Card className="shadow rounded">
                             <Card.Header>
                                 <h1>Ingresar</h1>
@@ -59,26 +66,25 @@ const LoginPage = (props) => {
                                             onChange={e => setLoginPassword(e.target.value)}/>
                                     </Form.Group>
                                     <Form.Group>
-                                        <Button variant="primary" type="submit" block>
+                                        <Button variant="primary" type="submit" block={true}>
                                             Ingresar
                                         </Button>
                                     </Form.Group>                          
                                     <hr className="solid"/>
-                                    <FacebookLoginButton>
+                                    <FacebookLoginButton onClick={onClickLoginFb}>
                                         <span>Ingresar con Facebook</span>
                                     </FacebookLoginButton>
-                                    <GoogleLoginButton>
+                                    <GoogleLoginButton onClick={onClickLoginGoogle}>
                                         <span>Ingresar con Google</span>
                                     </GoogleLoginButton>
                                 </Form>
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col md={6}>
+                    <Col md={12} xs={12} lg={6}>
                         <Container>
                             <Image src="/images/login.svg" className="p-5" fluid/>
                         </Container>
-                        
                     </Col>
                 </Row>           
             </Container>

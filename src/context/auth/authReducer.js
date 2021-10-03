@@ -1,10 +1,11 @@
 import { ERR_LOGIN, ERR_REGISTER, GET_USER, LOG_OUT } from "../../types/IndexTypes";
 
-
+//eslint-disable-next-line
 export default (state, action) => {
     switch (action.type) {
 
         case GET_USER:
+            console.log(action.payload);
             return {
                 ...state,
                 authenticated: true,

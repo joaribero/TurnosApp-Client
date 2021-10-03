@@ -7,8 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const RegisterPage = () => {
     
-    const [registerUsername,setRegisterUsername] = useState("");
-    const [registerPassword,setRegisterPassword] = useState("");
+    const [newUser,setNewUser] = useState({});
 
     const authContext = useContext(AuthContext);
     const {user,message, register} = authContext;
@@ -21,19 +20,26 @@ const RegisterPage = () => {
         if (message) {
             notify();
         }
-
+        //eslint-disable-next-line
     },[message]);
+
+    const handleChange = (e) => {
+        setNewUser({
+            ...newUser,
+            [e.target.name]: e.target.value
+        })
+    }
 
     const onSubmitRegister = async e => {
         e.preventDefault();
-        register(registerUsername,registerPassword);
+        register(newUser);
     }
     if (user) return <Redirect to='/'/>
     
     return (  
-        <Container className="p-5">      
+        <Container className="p-5 overflow-auto">      
                 <Row className="show-grid">
-                    <Col md={5} className="show-grid">
+                    <Col md={12} xs={12} lg={5} className="show-grid">
                         <Card className="shadow rounded">
                             <Card.Header>
                                 <h1>Creación de cuenta</h1>
@@ -44,22 +50,27 @@ const RegisterPage = () => {
                                     <Form.Group className="mb-3" controlId="formBasicText">
                                         <Form.Label>Nombre de usuario</Form.Label>
                                         <Form.Control type="text" 
-                                            placeholder="Nombre de usuario"  
-                                            onChange={e => setRegisterUsername(e.target.value)}/>
+                                            placeholder="Nombre de usuario"
+                                            name="username"  
+                                            onChange={handleChange}/>
                                     </Form.Group>
                                     <Row className="g-2">
                                         <Col md>
                                             <Form.Group className="mb-3" controlId="formBasicText">
                                             <   Form.Label>Nombre</Form.Label>
                                                 <Form.Control type="text"
-                                                    placeholder="Nombre"/>
+                                                    placeholder="Nombre"
+                                                    name="firstName"
+                                                    onChange={handleChange}/>
                                             </Form.Group>
                                         </Col>
                                         <Col md>
                                             <Form.Group className="mb-3" controlId="formBasicText">
                                             <   Form.Label>Apellido</Form.Label>
                                                 <Form.Control type="text"
-                                                    placeholder="Apellido"/>
+                                                    placeholder="Apellido"
+                                                    name="lastName"
+                                                    onChange={handleChange}/>
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -67,14 +78,16 @@ const RegisterPage = () => {
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label>Email</Form.Label>
                                         <Form.Control type="email" 
-                                            placeholder="Email"  
-                                            onChange={e => setRegisterUsername(e.target.value)}/>
+                                            placeholder="Email"
+                                            name="email"  
+                                            onChange={handleChange}/>
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="formBasicNumber">
                                         <Form.Label>Teléfono</Form.Label>
                                         <Form.Control type="number" 
-                                            placeholder="Ingresa tu teléfono"  
-                                            onChange={e => setRegisterUsername(e.target.value)}/>
+                                            placeholder="Ingresa tu teléfono"
+                                            name="number"  
+                                            onChange={handleChange}/>
                                         <Form.Text className="text-muted">
                                             Sin el 0 y sin el 15 en caso de ser un celular.
                                         </Form.Text>
@@ -83,8 +96,9 @@ const RegisterPage = () => {
                                         <Form.Label>Contraseña</Form.Label>
                                         <Form.Control type="password" 
                                             placeholder="Contraseña"
-                                            aria-describedby="passwordHelp" 
-                                            onChange={e => setRegisterPassword(e.target.value)}/>
+                                            aria-describedby="passwordHelp"
+                                            name="password" 
+                                            onChange={handleChange}/>
                                         <Form.Text id="passwordHelp" muted>
                                             Debe contener más de 6 caracteres y sin caracteres especiales.
                                         </Form.Text>
@@ -92,8 +106,9 @@ const RegisterPage = () => {
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label>Repite la contraseña</Form.Label>
                                         <Form.Control type="password" 
-                                            placeholder="Repite la contraseña" 
-                                            onChange={e => setRegisterPassword(e.target.value)}/>
+                                            placeholder="Repite la contraseña"
+                                            name="verifiedPassword" 
+                                            onChange={handleChange}/>
                                     </Form.Group>
                                     <Button variant="primary" type="submit" className="block">
                                         Registrarse
@@ -102,7 +117,7 @@ const RegisterPage = () => {
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col md={6}>
+                    <Col md={12} xs={12} lg={6}>
                         <Container>
                             <Image src="/images/register.svg" className="p-5" fluid/>
                         </Container>

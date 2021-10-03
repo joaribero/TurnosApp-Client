@@ -1,7 +1,6 @@
-import React, {useEffect, useReducer} from 'react';
+import React, { useReducer} from 'react';
 import AuthContext from './authContext';
 import AuthReducer from './authReducer';
-import axios from 'axios';
 import { ERR_LOGIN, ERR_REGISTER, GET_USER, LOG_OUT } from '../../types/IndexTypes';
 import clientAxios from '../../helpers/axiosHelper';
 
@@ -22,6 +21,7 @@ const AuthState = props => {
         
         try {
             const response = await clientAxios.get('/user');
+            console.log(response.data);
             if (response) {
                 dispatch({
                     type: GET_USER,
@@ -57,13 +57,46 @@ const AuthState = props => {
         }
     }
 
+    const fbLogin = async () => {
+        try {
+            window.open("http://localhost:4000/auth/facebook","_self");
+            getUser();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const googleLogin = async () => {
+        try {
+            window.open("http://localhost:4000/auth/google","_self");
+            getUser();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     // TODO: Recibir directamente un objeto con todos los datos necesarios para registrar.
     //funcion para registrar usuarios
-    const register = async (registerUsername, registerPassword) => {
+    const register = async (newUser) => {
+        
+        const {username, password, verifiedPassword, email, number, firstName, lastName} = newUser;
+
+        //antes de enviar a registrar controlo que coincidan las contraseñas.
+        if (password !== verifiedPassword) {
+            dispatch({
+                type: ERR_REGISTER,
+                payload: "Las contraseñas no coinciden"
+            })
+            return;
+        }
         
         const user = {
-            username: registerUsername,
-            password: registerPassword
+            username: username,
+            password: password,
+            email: email,
+            number: number,
+            firstName: firstName,
+            lastName: lastName
         };
 
         try {
@@ -79,6 +112,10 @@ const AuthState = props => {
             }
         } catch (error) {
             console.log(error);
+            dispatch({
+                type: ERR_REGISTER,
+                payload: "Unexpected error"
+            });
         }            
     };
 
@@ -105,7 +142,9 @@ const AuthState = props => {
                 getUser,
                 login,
                 register,
-                logout
+                logout,
+                fbLogin,
+                googleLogin
             }}>
             {props.children}
         </AuthContext.Provider>
