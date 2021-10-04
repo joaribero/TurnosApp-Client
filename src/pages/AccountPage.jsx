@@ -3,6 +3,7 @@ import { Container, Image, Button, Card, Row, Col} from "react-bootstrap";
 import AuthContext from "../context/auth/authContext";
 import  {ToastContainer, toast} from 'react-toastify';
 import SocialMediaCard from "../components/Account/SocialMedia";
+import ContactDataCard from "../components/Account/ContactData";
 
 const AccountPage = () => {
     
@@ -58,21 +59,11 @@ const AccountPage = () => {
             </div>
             <hr/>
             <Row className="justify-content-center">
-                <Col md={5} lg={5} xs={12}>
+                <Col md={6} lg={5} xs={12}>
                     <SocialMediaCard/>                         
                 </Col>
-                <Col md={5} lg={5} xs={12}>
-                    <Card className="mb-2 bg-light shadow">
-                        <Card.Body>
-                            <Card.Title>Datos de contacto</Card.Title>
-                            <hr/>
-                            <ul>
-                                <li><i className="fa fa-facebook me-2"></i></li>
-                                <li><i className="fa fa-facebook me-2"></i></li>
-                                <li><i className="fa fa-facebook me-2"></i></li>
-                            </ul>
-                        </Card.Body>
-                    </Card>
+                <Col md={6} lg={5} xs={12}>
+                    <ContactDataCard/>
                 </Col>
             </Row>
             

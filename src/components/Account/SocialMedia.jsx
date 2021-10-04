@@ -27,7 +27,8 @@ const SocialMediaCard = () => {
 
     const stateMenuSocials = (e) => {
         e.preventDefault();
-        setEditSocial(!editSocial)
+        setEditSocial(!editSocial);
+        setSocials({});
     }
 
     const onSubmitSocials = e => {
@@ -50,7 +51,12 @@ const SocialMediaCard = () => {
     return (  
         <Card className="mb-3 bg-light shadow">
                         <Card.Body>
-                            <Card.Title>Tus redes sociales</Card.Title>
+                            <div className="d-flex">
+                                <Card.Title>Tus redes sociales </Card.Title>
+                                <Button type="button" variant="outline-secondary" className="ms-auto" size="sm" onClick={stateMenuSocials}>
+                                    <i class="far fa-edit"></i>
+                                </Button>
+                            </div>
                             <hr/>
                             <Form>
                                 <FormGroup>
@@ -130,20 +136,16 @@ const SocialMediaCard = () => {
                                     </InputGroup>
                                 </FormGroup>
                                 <div className="d-flex flex-row-reverse">
-                                    {editSocial ? 
-                                    <Button type="button" variant="info" onClick={stateMenuSocials}>
-                                        Editar <i class="far fa-edit"></i>
+                                    {!editSocial ? 
+                                    <>
+                                    <Button type="submit" variant="success" onClick={onSubmitSocials}>
+                                        Aceptar <i class="far fa-check-circle"></i>
                                     </Button>
-                                    : 
-                                        <>
-                                        <Button type="submit" variant="success" onClick={onSubmitSocials}>
-                                            Aceptar <i class="far fa-check-circle"></i>
-                                        </Button>
-                                        <Button variant="danger" className="me-2" onClick={stateMenuSocials}>
-                                            Cancelar <i class="fas fa-ban"></i>
-                                        </Button>
-                                        </>
-                                    }
+                                    <Button variant="danger" className="me-2" onClick={stateMenuSocials}>
+                                        Cancelar <i class="fas fa-ban"></i>
+                                    </Button>
+                                    </>
+                                    : null }
                                 </div>
                             </Form>
                         </Card.Body>
