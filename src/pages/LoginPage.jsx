@@ -13,7 +13,7 @@ const LoginPage = (props) => {
     const [loginUsername,setLoginUsername] = useState("");
     const [loginPassword,setLoginPassword] = useState("");
 
-    const notify = () => toast.error(message);
+    const notify = () => toast.error(message.text);
 
     //check if there is a error message.
     useEffect(() => {
@@ -51,7 +51,16 @@ const LoginPage = (props) => {
                             </Card.Header>
                             <Card.Body>
                                 <Form onSubmit={onSubmitLogin}>
-                                    <ToastContainer/>
+                                    <ToastContainer position="top-right"
+                                        autoClose={5000}
+                                        hideProgressBar={false}
+                                        newestOnTop={false}
+                                        closeOnClick
+                                        rtl={false}
+                                        pauseOnFocusLoss
+                                        draggable
+                                        pauseOnHover
+                                        theme='colored'/>
                                     <Form.Group className="mb-3" controlId="formBasicEmail">
                                         <Form.Label>Usuario</Form.Label>
                                         <Form.Control type="text" 

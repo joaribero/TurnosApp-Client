@@ -1,4 +1,4 @@
-import { ERR_LOGIN, ERR_REGISTER, GET_USER, LOG_OUT } from "../../types/IndexTypes";
+import { ADD_SOCIALS, ERR_LOGIN, ERR_REGISTER, ERR_SOCIALS, GET_USER, LOG_OUT } from "../../types/IndexTypes";
 
 //eslint-disable-next-line
 export default (state, action) => {
@@ -10,16 +10,32 @@ export default (state, action) => {
                 ...state,
                 authenticated: true,
                 user: action.payload,
-                message: null
+                message: {
+                    text: null,
+                    category: null
+                }
             }
         
+        case ERR_SOCIALS:
         case ERR_REGISTER:    
         case ERR_LOGIN:
             return {
                 ...state,
                 user: null,
                 authenticated: false,
-                message: action.payload
+                message: {
+                    text: action.payload.error,
+                    category: action.payload.category
+                }
+            }
+        
+        case ADD_SOCIALS:
+            return {
+                ...state,
+                message: {
+                    text: action.payload.msg,
+                    category: action.payload.category
+                }
             }
         
         case LOG_OUT:

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
+//eslint-disable-next-line
 import bootstrap from 'bootstrap';
 import AuthContext from "../context/auth/authContext";
 import { NavLink } from "react-router-dom";
-import {NavDropdown, Button, Dropdown} from "react-bootstrap";
 
 const Sidebar = () => {
 
@@ -15,14 +15,6 @@ const Sidebar = () => {
     };
     
     return (  
-        /*<Fragment>
-            <Offcanvas show={show} onHide={handleClose} scroll={true} backdrop={false} className="sidebar-nav bg-light">
-                <Offcanvas.Body>
-                    Some text as placeholder. In real life you can have the elements you
-                    have chosen. Like, text, images, lists, etc.
-                </Offcanvas.Body>
-            </Offcanvas>
-        </Fragment>*/
         
         <div className="offcanvas offcanvas-start sidebar-nav bg-dark " data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
             <ul className="nav nav-pills flex-column mb-auto mt-2">
@@ -63,7 +55,8 @@ const Sidebar = () => {
             </ul>
             {user ? 
             <>
-                <hr className="bg-light"/> 
+                <hr className="bg-light mb-0"/> 
+                {/*
                 <div className="btn-group dropup mb-2 ms-2">
                     <a type="button" className="d-flex dropdown-toggle text-decoration-none link-light align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src={user.picture} alt="" width="32" height="32" class="rounded-circle me-2"/> 
@@ -73,7 +66,7 @@ const Sidebar = () => {
                         <li><NavLink className="dropdown-item" to="/account">Account</NavLink></li>
                         <li><button class="dropdown-item" onClick={onClickLogout}>Logout</button></li>
                     </ul>
-                </div>
+                </div>*/}
                 <div className="accordion accordion-flush text-white" id="accordionFlushExample">
                     <div className="accordion-item bg-dark">
                         <h2 className="accordion-header bg-dark text-white" id="flush-headingOne">
@@ -85,9 +78,13 @@ const Sidebar = () => {
                         <div id="flush-collapseOne" className="accordion-collapse collapse bg-dark" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
                                 <ul className="list-unstyled">
-                                    <li ><NavLink className="dropdown-item text-white bg-dark" to="/account">Account</NavLink></li>
+                                    <li ><NavLink className="dropdown-item text-white bg-dark" to="/account">
+                                        <i class="fas fa-user-alt me-3"></i>Account</NavLink>
+                                    </li>
                                     <hr/>
-                                    <li><button className="dropdown-item text-white bg-dark" onClick={onClickLogout}>Logout</button></li>
+                                    <li><button className="dropdown-item text-white bg-dark" onClick={onClickLogout}>
+                                        <i class="fas fa-sign-out-alt me-3"></i>Logout</button>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

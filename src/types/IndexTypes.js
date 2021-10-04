@@ -7,3 +7,7 @@ export const ERR_REGISTER = 'ERR_REGISTER';
 //SIDEBAR
 export const TOGGLE_SIDE = 'TOGGLE_SIDE';
 export const HIDE_SIDE = 'HIDE_SIDE';
+
+//ACCOUNT
+export const ERR_SOCIALS = 'ERR_SOCIALS';
+export const ADD_SOCIALS = 'ADD_SOCIALS';

@@ -1,7 +1,7 @@
 import React, { useReducer} from 'react';
 import AuthContext from './authContext';
 import AuthReducer from './authReducer';
-import { ERR_LOGIN, ERR_REGISTER, GET_USER, LOG_OUT } from '../../types/IndexTypes';
+import { ADD_SOCIALS, ERR_LOGIN, ERR_REGISTER, ERR_SOCIALS, GET_USER, LOG_OUT } from '../../types/IndexTypes';
 import clientAxios from '../../helpers/axiosHelper';
 
 const AuthState = props => {
@@ -10,7 +10,10 @@ const AuthState = props => {
         user: {},
         role: null,
         authenticated: false,
-        message: null
+        message: {
+            text: null,
+            category: null
+        }
     };
 
     const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -21,7 +24,6 @@ const AuthState = props => {
         
         try {
             const response = await clientAxios.get('/user');
-            console.log(response.data);
             if (response) {
                 dispatch({
                     type: GET_USER,
@@ -46,7 +48,7 @@ const AuthState = props => {
             if (response.data.error) {
                 dispatch({
                     type: ERR_LOGIN,
-                    payload: response.data.error
+                    payload: response.data
                 }) 
             } 
             if (response) {
@@ -57,6 +59,7 @@ const AuthState = props => {
         }
     }
 
+    //login con facebook
     const fbLogin = async () => {
         try {
             window.open("http://localhost:4000/auth/facebook","_self");
@@ -66,6 +69,7 @@ const AuthState = props => {
         }
     }
 
+    //login con google
     const googleLogin = async () => {
         try {
             window.open("http://localhost:4000/auth/google","_self");
@@ -75,7 +79,6 @@ const AuthState = props => {
         }
     }
 
-    // TODO: Recibir directamente un objeto con todos los datos necesarios para registrar.
     //funcion para registrar usuarios
     const register = async (newUser) => {
         
@@ -132,6 +135,28 @@ const AuthState = props => {
         }
     }
 
+    //función para editar redes sociales del usuario
+    const editSocials = async (socials) => {
+        try {
+            const response = await clientAxios.post('/addSocials', socials);
+            if (response.data.error) {
+                dispatch({
+                    type: ERR_SOCIALS,
+                    payload: response.data
+                })
+                return;
+            }
+            dispatch({
+                type:ADD_SOCIALS,
+                payload: response.data
+            })
+            getUser();
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <AuthContext.Provider 
             value={{
@@ -144,7 +169,8 @@ const AuthState = props => {
                 register,
                 logout,
                 fbLogin,
-                googleLogin
+                googleLogin,
+                editSocials
             }}>
             {props.children}
         </AuthContext.Provider>
