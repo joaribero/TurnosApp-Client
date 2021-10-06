@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Container, Image, Button, Card, Row, Col} from "react-bootstrap";
+import { Container, Image, Button, Row, Col} from "react-bootstrap";
 import AuthContext from "../context/auth/authContext";
 import  {ToastContainer, toast} from 'react-toastify';
 import SocialMediaCard from "../components/Account/SocialMedia";
@@ -8,8 +8,7 @@ import ContactDataCard from "../components/Account/ContactData";
 const AccountPage = () => {
     
     const authContext = useContext(AuthContext);
-    const {user,message, getUser} = authContext;
-    getUser();
+    const {user,message} = authContext;
 
     const notify = () => {
         

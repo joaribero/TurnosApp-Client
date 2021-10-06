@@ -5,7 +5,7 @@ import AuthContext from '../../context/auth/authContext';
 const SocialMediaCard = () => {
 
     const authContext = useContext(AuthContext);
-    const {user, editSocials, getUser} = authContext;
+    const {user, editSocials} = authContext;
 
     const [editSocial,setEditSocial] = useState(true);
     const [socials,setSocials] = useState({

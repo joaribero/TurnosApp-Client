@@ -19,35 +19,35 @@ const Sidebar = () => {
         <div className="offcanvas offcanvas-start sidebar-nav bg-dark " data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
             <ul className="nav nav-pills flex-column mb-auto mt-2">
                 <li className="nav-item">
-                    <a href="#" className="nav-link link-light" aria-current="page">
+                    <a href="/" className="nav-link link-light" aria-current="page">
                     <i class="fas fa-home me-2"></i>
                     Home
                     </a>
                 </li>
                 <hr className="bg-light"/>
                 <li>
-                    <a href="#" className="nav-link link-light">
+                    <a href="/projects" className="nav-link link-light">
                     <i class="fas fa-tachometer-alt me-2"></i>
                     Dashboard
                     </a>
                 </li>
                 <hr className="bg-light"/>
                 <li>
-                    <a href="#" className="nav-link link-light">
+                    <a href="/account" className="nav-link link-light">
                     <i class="fas fa-tachometer-alt me-2"></i>
                     Orders
                     </a>
                 </li>
                 <hr className="bg-light"/>
                 <li>
-                    <a href="#" className="nav-link link-light">
+                    <a href="/projects" className="nav-link link-light">
                     <i class="fas fa-tachometer-alt me-2"></i>
                     Products
                     </a>
                 </li>
                 <hr className="bg-light"/>
                 <li>
-                    <a href="#" className="nav-link link-light">
+                    <a href="/users" className="nav-link link-light">
                     <i class="fas fa-tachometer-alt me-2"></i>
                     Customers
                     </a>

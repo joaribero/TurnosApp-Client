@@ -1,11 +1,10 @@
-import { ADD_SOCIALS, ERR_LOGIN, ERR_REGISTER, ERR_SOCIALS, GET_USER, LOG_OUT } from "../../types/IndexTypes";
+import { ADD_CONTACT_DATA, ADD_SOCIALS, ERR_CONTACT_DATA, ERR_LOGIN, ERR_REGISTER, ERR_SOCIALS, GET_USER, LOG_OUT } from "../../types/IndexTypes";
 
 //eslint-disable-next-line
 export default (state, action) => {
     switch (action.type) {
 
         case GET_USER:
-            console.log(action.payload);
             return {
                 ...state,
                 authenticated: true,
@@ -17,6 +16,7 @@ export default (state, action) => {
             }
         
         case ERR_SOCIALS:
+        case ERR_CONTACT_DATA:
         case ERR_REGISTER:    
         case ERR_LOGIN:
             return {
@@ -30,6 +30,7 @@ export default (state, action) => {
             }
         
         case ADD_SOCIALS:
+        case ADD_CONTACT_DATA:
             return {
                 ...state,
                 message: {

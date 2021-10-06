@@ -15,9 +15,9 @@ const Footer = () => {
     </div>*/}
             <div className="footer-bottom">
                 <p className="me-auto">&copy; {new Date().getFullYear()} TurnosApp | Designed by <span>jribero </span>  
-                    | <a href="https://www.facebook.com/joa.ribero/" target="_blank"><i className="fa fa-facebook me-2"></i></a> 
-                    | <a href="https://www.instagram.com/joa.ribero/" target="_blank"><i className="fa fa-instagram me-2"></i></a>
-                    | <a href="https://www.linkedin.com/in/joaquinribero/" target="_blank"><i className="fa fa-linkedin me-2"></i></a></p>
+                    | <a href="https://www.facebook.com/joa.ribero/" target="_blank" rel="noreferrer"><i className="fa fa-facebook me-2"></i></a> 
+                    | <a href="https://www.instagram.com/joa.ribero/" target="_blank" rel="noreferrer"><i className="fa fa-instagram me-2"></i></a>
+                    | <a href="https://www.linkedin.com/in/joaquinribero/" target="_blank" rel="noreferrer"><i className="fa fa-linkedin me-2"></i></a></p>
             </div>
         </footer>
         
