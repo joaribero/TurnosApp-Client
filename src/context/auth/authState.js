@@ -1,4 +1,4 @@
-import React, { useReducer, useState} from 'react';
+import React, { useReducer} from 'react';
 import AuthContext from './authContext';
 import AuthReducer from './authReducer';
 import { ADD_CONTACT_DATA, ADD_SOCIALS, ERR_CONTACT_DATA, ERR_LOGIN, ERR_REGISTER, ERR_SOCIALS, GET_USER, LOG_OUT } from '../../types/IndexTypes';
@@ -17,7 +17,6 @@ const AuthState = props => {
     };
 
     const [state, dispatch] = useReducer(AuthReducer, initialState);
-    const [iUser,setIUser] = useState({});
 
     //obtengo el usuario logueado.
     const getUser = async () => {
@@ -188,8 +187,6 @@ const AuthState = props => {
                 role: state.role,
                 authenticated: state.authenticated,
                 message: state.message,
-                iUser,
-                setIUser, 
                 getUser,
                 login,
                 register,
