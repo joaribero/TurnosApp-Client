@@ -83,13 +83,12 @@ const Sidebar = () => {
                         </button>
                         </h2>
                         <div id="flush-collapseOne" className="accordion-collapse collapse bg-light" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
+                            <div class="accordion-body acc-body">
                                 <ul className="list-unstyled">
-                                    <li ><NavLink className="dropdown-item bg-light" to="/account">
+                                    <li className="nav-item-sidebar p-2" ><NavLink className="dropdown-item bg-light" to="/account">
                                         <i class="fas fa-user-alt me-3"></i>Account</NavLink>
                                     </li>
-                                    <hr className="bg-dark"/>
-                                    <li><button className="dropdown-item bg-light" onClick={onClickLogout}>
+                                    <li className="nav-item-sidebar p-2"><button className="dropdown-item bg-light" onClick={onClickLogout}>
                                         <i class="fas fa-sign-out-alt me-3"></i>Logout</button>
                                     </li>
                                 </ul>

@@ -2,12 +2,16 @@ import React, { useReducer } from 'react';
 import UserReducer from './userReducer';
 import UserContext from './userContext'
 import clientAxios from '../../helpers/axiosHelper';
-import { GET_USERS } from '../../types/IndexTypes';
+import { ADD_ROLE, GET_USERS } from '../../types/IndexTypes';
 
 const UserState = (props) => {
     
     const initialState = {
-        users: []
+        users: [],
+        message: {
+            text: null,
+            category: null
+        }
     };
 
     const [state, dispatch] = useReducer(UserReducer, initialState);
@@ -26,11 +30,26 @@ const UserState = (props) => {
             console.log(error);
         }
     }
+
+    //función para agregar nuevos roles
+    const addRole = async (data) => {
+        try {
+            const response = await clientAxios.post('/addRole', data);
+            dispatch({
+                type: ADD_ROLE,
+                payload: response.data
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
     
     return (  
         <UserContext.Provider value={{
             users: state.users,
-            getUsers
+            message: state.message,
+            getUsers,
+            addRole
         }}>
             {props.children}
         </UserContext.Provider>

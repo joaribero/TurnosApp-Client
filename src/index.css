@@ -154,3 +154,8 @@ hr.solid {
   border-left: 5px solid #5000ca;
 }
 
+.acc-body {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+

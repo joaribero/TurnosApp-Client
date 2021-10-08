@@ -1,4 +1,4 @@
-import { GET_USERS } from "../../types/IndexTypes";
+import { ADD_ROLE, GET_USERS } from "../../types/IndexTypes";
 
 //eslint-disable-next-line
 export default (state, action) => {
@@ -9,6 +9,15 @@ export default (state, action) => {
             return {
                 ...state,
                 users: action.payload
+            }
+        
+        case ADD_ROLE:
+            return {
+                ...state,
+                message: {
+                    text: action.payload.msg,
+                    category: action.payload.category
+                }
             }
 
         default:
