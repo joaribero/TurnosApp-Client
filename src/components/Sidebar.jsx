@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import bootstrap from 'bootstrap';
 import AuthContext from "../context/auth/authContext";
 import { NavLink } from "react-router-dom";
+import { Nav } from "react-bootstrap";
 
 const Sidebar = () => {
 
@@ -16,46 +17,52 @@ const Sidebar = () => {
     
     return (  
         
-        <div className="offcanvas offcanvas-start sidebar-nav bg-dark " data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
-            <ul className="nav nav-pills flex-column mb-auto mt-2">
-                <li className="nav-item">
-                    <a href="/" className="nav-link link-light" aria-current="page">
-                    <i class="fas fa-home me-2"></i>
-                    Home
-                    </a>
+        <div className="offcanvas offcanvas-start sidebar-nav bg-light " data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+            <ul className="nav flex-column mb-auto">              
+                <li className="nav-item-sidebar p-2">
+                    <Nav>
+                        <Nav.Link as={NavLink} to="/a" className="link-dark">
+                            <i class="fas fa-home me-2"></i>
+                            Home
+                        </Nav.Link>
+                    </Nav>
                 </li>
-                <hr className="bg-light"/>
-                <li>
-                    <a href="/projects" className="nav-link link-light">
-                    <i class="fas fa-tachometer-alt me-2"></i>
-                    Dashboard
-                    </a>
+                <li className="nav-item nav-item-sidebar p-2">
+                    <Nav>
+                        <Nav.Link as={NavLink} to="/projects" className="link-dark">
+                            <i class="fas fa-home me-2"></i>
+                            Espacios
+                        </Nav.Link>
+                    </Nav>
                 </li>
-                <hr className="bg-light"/>
-                <li>
-                    <a href="/account" className="nav-link link-light">
-                    <i class="fas fa-tachometer-alt me-2"></i>
-                    Orders
-                    </a>
+                <li className="nav-item nav-item-sidebar p-2">
+                    <Nav>
+                        <Nav.Link as={NavLink} to="/account" className="link-dark">
+                            <i class="fas fa-home me-2"></i>
+                            Mis turnos
+                        </Nav.Link>
+                    </Nav>
                 </li>
-                <hr className="bg-light"/>
-                <li>
-                    <a href="/projects" className="nav-link link-light">
-                    <i class="fas fa-tachometer-alt me-2"></i>
-                    Products
-                    </a>
+                <li className="nav-item nav-item-sidebar p-2">
+                    <Nav>
+                        <Nav.Link as={NavLink} to="/admin/users" className="link-dark">
+                            <i class="fas fa-home me-2"></i>
+                            Buscar equipos
+                        </Nav.Link>
+                    </Nav>
                 </li>
-                <hr className="bg-light"/>
-                <li>
-                    <a href="/users" className="nav-link link-light">
-                    <i class="fas fa-tachometer-alt me-2"></i>
-                    Customers
-                    </a>
+                <li className="nav-item nav-item-sidebar p-2">
+                    <Nav>
+                        <Nav.Link as={NavLink} to="/asfasfsa" className="link-dark">
+                            <i class="fas fa-home me-2"></i>
+                            404
+                        </Nav.Link>
+                    </Nav>
                 </li>
             </ul>
             {user ? 
             <>
-                <hr className="bg-light mb-0"/> 
+                <hr className="bg-dark mb-0"/> 
                 {/*
                 <div className="btn-group dropup mb-2 ms-2">
                     <a type="button" className="d-flex dropdown-toggle text-decoration-none link-light align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
@@ -68,21 +75,21 @@ const Sidebar = () => {
                     </ul>
                 </div>*/}
                 <div className="accordion accordion-flush text-white" id="accordionFlushExample">
-                    <div className="accordion-item bg-dark">
-                        <h2 className="accordion-header bg-dark text-white" id="flush-headingOne">
-                        <button className="accordion-button collapsed bg-dark text-white acc-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    <div className="accordion-item bg-light">
+                        <h2 className="accordion-header bg-light text-white" id="flush-headingOne">
+                        <button className="accordion-button collapsed bg-light acc-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                             <img src={user.picture} alt="" width="32" height="32" class="rounded-circle me-2"/> 
                             <strong>{user.firstName} {user.lastName}</strong>
                         </button>
                         </h2>
-                        <div id="flush-collapseOne" className="accordion-collapse collapse bg-dark" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div id="flush-collapseOne" className="accordion-collapse collapse bg-light" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
                                 <ul className="list-unstyled">
-                                    <li ><NavLink className="dropdown-item text-white bg-dark" to="/account">
+                                    <li ><NavLink className="dropdown-item bg-light" to="/account">
                                         <i class="fas fa-user-alt me-3"></i>Account</NavLink>
                                     </li>
-                                    <hr/>
-                                    <li><button className="dropdown-item text-white bg-dark" onClick={onClickLogout}>
+                                    <hr className="bg-dark"/>
+                                    <li><button className="dropdown-item bg-light" onClick={onClickLogout}>
                                         <i class="fas fa-sign-out-alt me-3"></i>Logout</button>
                                     </li>
                                 </ul>

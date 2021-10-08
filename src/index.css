@@ -142,3 +142,15 @@ hr.solid {
   border-top: 3px solid #bbb;
 }
 
+.nav-item-sidebar{
+  border-bottom: 1px solid lightgray;
+}
+
+.nav-item-sidebar a.active {
+  color: #5000ca
+}
+
+.nav-item-sidebar:hover {
+  border-left: 5px solid #5000ca;
+}
+
