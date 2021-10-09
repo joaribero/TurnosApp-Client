@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import UserReducer from './userReducer';
 import UserContext from './userContext'
 import clientAxios from '../../helpers/axiosHelper';
-import { ADD_ROLE, GET_USERS } from '../../types/IndexTypes';
+import { ADD_ROLE, GET_ROLES, GET_USERS } from '../../types/IndexTypes';
 
 const UserState = (props) => {
     
@@ -11,7 +11,8 @@ const UserState = (props) => {
         message: {
             text: null,
             category: null
-        }
+        },
+        roles: []
     };
 
     const [state, dispatch] = useReducer(UserReducer, initialState);
@@ -39,6 +40,21 @@ const UserState = (props) => {
                 type: ADD_ROLE,
                 payload: response.data
             })
+            getRoles();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getRoles = async () => {
+
+        try {
+
+            const response = await clientAxios.get('/getRoles');
+            dispatch({
+                type: GET_ROLES,
+                payload: response.data
+            })
         } catch (error) {
             console.log(error);
         }
@@ -48,8 +64,10 @@ const UserState = (props) => {
         <UserContext.Provider value={{
             users: state.users,
             message: state.message,
+            roles: state.roles,
             getUsers,
-            addRole
+            addRole,
+            getRoles
         }}>
             {props.children}
         </UserContext.Provider>

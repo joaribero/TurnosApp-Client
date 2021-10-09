@@ -5,13 +5,17 @@ import {Table, Button, Modal, Form, Row, Col} from 'react-bootstrap'
 const TableUsers = () => {
     
     const userContext = useContext(UserContext);
-    const {users} = userContext;
+    const {users, roles, getRoles} = userContext;
 
     const [user, setUser] = useState({});
     const [show, setShow] = useState(false);
+
+    if (roles.length === 0) {
+        getRoles();
+    }
     
     if (users.length === 0) return (<h3>Genera el listado de usuarios</h3>)
-
+   
     const handleClose = () => setShow(false);
     const handleShow = (currUser) => {
         
@@ -50,9 +54,9 @@ const TableUsers = () => {
                                 <Form.Label>Asignar Rol:</Form.Label>
                                 <Form.Select aria-label="Default select example">
                                     <option>Rol</option>
-                                    <option value="1">Administrador</option>
-                                    <option value="2">Comercial</option>
-                                    <option value="3">Regular</option>
+                                    {roles.map((rol) => (
+                                        <option value={rol.Id}>{rol.Name}</option>
+                                    ))}
                                 </Form.Select>
                             </Form.Group>
                         </Col>                       
@@ -77,6 +81,7 @@ const TableUsers = () => {
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Fecha</th>
+                    <th>Rol</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,6 +93,7 @@ const TableUsers = () => {
                     <td>{user.firstName}</td>
                     <td>{user.lastName}</td>
                     <td>{user.date}</td>
+                    <td>{user.roleId}</td>
                     <td><Button variant="outline-success" onClick={() => {handleShow(user)}}><i class="far fa-edit"></i></Button></td>
                 </tr>
             ))}

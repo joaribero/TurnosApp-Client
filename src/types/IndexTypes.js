@@ -16,5 +16,6 @@ export const ADD_CONTACT_DATA = 'ADD_CONTACT_DATA';
 
 //USER
 export const GET_USERS = 'GET_USERS';
+export const GET_ROLES = 'GET_ROLES';
 export const ADD_ROLE = 'ADD_ROLE';
 export const ERR_ROLE = 'ERR_ROLE';
