@@ -5,13 +5,14 @@ import {Table, Button, Modal, Form, Row, Col} from 'react-bootstrap'
 const TableUsers = () => {
     
     const userContext = useContext(UserContext);
-    const {users, roles, getRoles} = userContext;
+    const {users, roles, states, getRoles, getUserStates} = userContext;
 
     const [user, setUser] = useState({});
     const [show, setShow] = useState(false);
 
-    if (roles.length === 0) {
+    if (roles.length === 0 || states.length === 0) {
         getRoles();
+        getUserStates();
     }
     
     if (users.length === 0) return (<h3>Genera el listado de usuarios</h3>)
@@ -43,9 +44,9 @@ const TableUsers = () => {
                                 <Form.Label>Estado del usuario:</Form.Label>
                                 <Form.Select aria-label="Default select example">
                                     <option>Estado</option>
-                                    <option value="1">Activo</option>
-                                    <option value="2">Baja</option>
-                                    <option value="3">Bloqueado</option>
+                                    {states.map((state) => (
+                                        <option value={state.Id}>{state.Name}</option>
+                                    ))}
                                 </Form.Select>
                             </Form.Group>
                         </Col>

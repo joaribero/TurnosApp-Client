@@ -19,3 +19,6 @@ export const GET_USERS = 'GET_USERS';
 export const GET_ROLES = 'GET_ROLES';
 export const ADD_ROLE = 'ADD_ROLE';
 export const ERR_ROLE = 'ERR_ROLE';
+export const GET_STATES = 'GET_STATES';
+export const ADD_STATE = 'ADD_STATE';
+export const ERR_STATE = 'ERR_STATE';

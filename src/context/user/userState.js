@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import UserReducer from './userReducer';
 import UserContext from './userContext'
 import clientAxios from '../../helpers/axiosHelper';
-import { ADD_ROLE, GET_ROLES, GET_USERS } from '../../types/IndexTypes';
+import { ADD_ROLE, ADD_STATE, GET_ROLES, GET_STATES, GET_USERS } from '../../types/IndexTypes';
 
 const UserState = (props) => {
     
@@ -12,7 +12,8 @@ const UserState = (props) => {
             text: null,
             category: null
         },
-        roles: []
+        roles: [],
+        states: []
     };
 
     const [state, dispatch] = useReducer(UserReducer, initialState);
@@ -46,13 +47,40 @@ const UserState = (props) => {
         }
     }
 
+    //obtener roles
     const getRoles = async () => {
 
         try {
-
             const response = await clientAxios.get('/getRoles');
             dispatch({
                 type: GET_ROLES,
+                payload: response.data
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    //función para agregar nuevos estados de usuario.
+    const addUserState = async (data) => {
+        try {
+            const response = await clientAxios.post('/addUserState', data);
+            dispatch({
+                type: ADD_STATE,
+                payload: response.data
+            })
+            getUserStates();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    //obtener estados del usuario
+    const getUserStates = async () => {
+        try {
+            const response = await clientAxios.get('/getUserStates');
+            dispatch({
+                type: GET_STATES,
                 payload: response.data
             })
         } catch (error) {
@@ -65,9 +93,12 @@ const UserState = (props) => {
             users: state.users,
             message: state.message,
             roles: state.roles,
+            states: state.states,
             getUsers,
             addRole,
-            getRoles
+            getRoles,
+            getUserStates,
+            addUserState
         }}>
             {props.children}
         </UserContext.Provider>

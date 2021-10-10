@@ -4,13 +4,15 @@ import TableUsers from "../../components/Users/Table";
 import UserContext from "../../context/user/userContext";
 import  {ToastContainer, toast} from 'react-toastify';
 import NewRoleModal from "../../components/Users/NewRoleModal";
+import NewStateModal from "../../components/Users/NewStateModal";
 
 const UsersPage = () => {
 
     const userContext = useContext(UserContext);
-    const {users, message, getUsers, addRole} = userContext;
+    const {users, message, getUsers, addRole, addUserState} = userContext;
 
-    const [showRole, setShowRole] = useState(false);
+    const [show, setShow] = useState(false);
+    const [modal, setModal] = useState('');
 
     const notify = () => {
         
@@ -32,8 +34,15 @@ const UsersPage = () => {
         //eslint-disable-next-line
     },[message])
 
-    const handleClose = () => setShowRole(false);
-    const handleShow = () => setShowRole(true);
+    const handleClose = () => setShow(false);
+    const handleShowRole = () => {
+        setModal('Role');
+        setShow(true);
+    };
+    const handleShowState = () => {
+        setModal('State');
+        setShow(true);
+    }
     
     return (  
         <>
@@ -46,12 +55,16 @@ const UsersPage = () => {
             pauseOnHover
             theme='colored'/>
         <Modal
-            show={showRole}
+            show={show}
             onHide={handleClose}
             backdrop="static"
             keyboard={false}
             centered>
-            <NewRoleModal setShowRole={setShowRole} addRole={addRole}/>
+            {modal === 'Role' ? <NewRoleModal setShowRole={setShow} addRole={addRole}/>
+            : null}
+            {modal === 'State' ? <NewStateModal setShowState={setShow} addUserState={addUserState}/>
+            : null}
+            
         </Modal>
         <Container fluid>
             <div className="account-header mt-3">
@@ -64,8 +77,11 @@ const UsersPage = () => {
                         Obtener listado
                     </Button>
                     : null }
-                    <Button type="button" className="me-2 mt-2" variant="primary" onClick={handleShow}>
+                    <Button type="button" className="me-2 mt-2" variant="primary" onClick={handleShowRole}>
                         Crear nuevo rol
+                    </Button>
+                    <Button type="button" className="me-2 mt-2" variant="primary" onClick={handleShowState}>
+                        Crear nuevo estado
                     </Button>
                 </div>              
             </div>
