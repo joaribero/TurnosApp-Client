@@ -15,7 +15,7 @@ const TableUsers = () => {
         getUserStates();
     }
     
-    if (users.length === 0) return (<h3>Genera el listado de usuarios</h3>)
+    if (users.length === 0 || !users) return (<h3>Genera el listado de usuarios</h3>)
    
     const handleClose = () => setShow(false);
     const handleShow = (currUser) => {

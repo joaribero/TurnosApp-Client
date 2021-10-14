@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import UserReducer from './userReducer';
 import UserContext from './userContext'
 import clientAxios from '../../helpers/axiosHelper';
-import { ADD_ROLE, ADD_STATE, GET_ROLES, GET_STATES, GET_USERS } from '../../types/IndexTypes';
+import { ADD_ROLE, ADD_STATE, ERR_ROLE, ERR_STATE, ERR_USERS, GET_ROLES, GET_STATES, GET_USERS } from '../../types/IndexTypes';
 
 const UserState = (props) => {
     
@@ -23,11 +23,17 @@ const UserState = (props) => {
 
         try {
             const response = await clientAxios.get('/users');
-            dispatch({
-                type: GET_USERS,
-                payload: response.data
-            })
-
+            if (response.data.error) {
+                dispatch({
+                    type: ERR_USERS,
+                    payload: response.data
+                })
+            } else {
+                dispatch({
+                    type: GET_USERS,
+                    payload: response.data
+                })
+            }
         } catch (error) {
             console.log(error);
         }
@@ -37,11 +43,18 @@ const UserState = (props) => {
     const addRole = async (data) => {
         try {
             const response = await clientAxios.post('/addRole', data);
-            dispatch({
-                type: ADD_ROLE,
-                payload: response.data
-            })
-            getRoles();
+            if (!response.data.error) {
+                dispatch({
+                    type: ADD_ROLE,
+                    payload: response.data
+                })
+                getRoles();
+            } else {
+                dispatch({
+                    type: ERR_ROLE,
+                    payload: response.data
+                })
+            }      
         } catch (error) {
             console.log(error);
         }
@@ -65,11 +78,18 @@ const UserState = (props) => {
     const addUserState = async (data) => {
         try {
             const response = await clientAxios.post('/addUserState', data);
-            dispatch({
-                type: ADD_STATE,
-                payload: response.data
-            })
-            getUserStates();
+            if (!response.data.error) {
+                dispatch({
+                    type: ADD_STATE,
+                    payload: response.data
+                })
+                getUserStates();
+            } else {
+                dispatch({
+                    type: ERR_STATE,
+                    payload: response.data
+                })
+            }          
         } catch (error) {
             console.log(error);
         }
